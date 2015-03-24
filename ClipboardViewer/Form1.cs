@@ -41,6 +41,7 @@ namespace ClipboardViewer
                 return;
             }
 
+            //gitがこの行をちゃんと反映してくれるかのテスト（二回目）
 
 
 
