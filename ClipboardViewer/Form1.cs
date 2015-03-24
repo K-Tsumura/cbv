@@ -42,6 +42,8 @@ namespace ClipboardViewer
             }
 
 
+
+
             for (int j = 0; j < val.moji.Length - 1; j++)
             {
                 if (args.Text == val.moji[j])
@@ -62,7 +64,7 @@ namespace ClipboardViewer
             val.moji[0] = args.Text;
             textBoxReDraw();
         }
-        //そういえばGitってこういうのもちゃんとわかってくれるのかな
+
         public void textBoxReDraw()
         {
             this.textBox1.Text = val.moji[0];
