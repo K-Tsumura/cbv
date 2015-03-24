@@ -62,7 +62,7 @@ namespace ClipboardViewer
             val.moji[0] = args.Text;
             textBoxReDraw();
         }
-
+        //そういえばGitってこういうのもちゃんとわかってくれるのかな
         public void textBoxReDraw()
         {
             this.textBox1.Text = val.moji[0];
