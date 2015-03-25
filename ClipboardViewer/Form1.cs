@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;   // iniファイル読み込み用
 
 namespace ClipboardViewer
 {
     public partial class Form1 : Form
     {
         private MyClipboardViewer viewer;
+
+        //iniファイルのパスを設定
+        public static string iniFileName = AppDomain.CurrentDomain.BaseDirectory + "conf.ini";
 
         public Form1()
         {
@@ -24,6 +28,28 @@ namespace ClipboardViewer
             // イベントハンドラを登録
             viewer.ClipboardHandler += this.OnClipBoardChanged;
             InitializeComponent();
+
+
+            //property変数の初期化
+            property.init();
+            
+            
+            // iniファイルから文字列を取得
+            iniWrite.GetPrivateProfileString(
+                "SETTINGS",                 // セクション名
+                "StartMode",                // キー名    
+                "normal",                   // 値が取得できなかった場合に返される初期値
+                property.StartMode,                             // 格納先
+                Convert.ToUInt32(property.StartMode.Capacity),  // 格納先のキャパ
+                iniFileName);                                   // iniファイル名
+
+            iniWrite.GetPrivateProfileString(
+                "SETTINGS","CloseButton","exit",
+                property.CloseButton,Convert.ToUInt32(property.StartMode.Capacity),iniFileName);
+
+
+
+
         }
 
         // クリップボードにテキストがコピーされると呼び出される
@@ -255,10 +281,38 @@ namespace ClipboardViewer
             Form1_MouseClick(sender, e);
         }
 
+        private void 設定ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Config1 ConfForm1 = new Config1();
+            ConfForm1.ShowDialog();
+        }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (property.CloseButton.ToString() == "min")
+            {
+                e.Cancel = true;
+                this.WindowState = FormWindowState.Minimized;
 
+            }
+           else if (property.CloseButton.ToString() == "exit")
+            {
+                //そのまま閉じてもらう
+            }
+        }
 
-        
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (property.StartMode.ToString() == "min")
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else if (property.StartMode.ToString() == "normal")
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
 
     }
 
@@ -267,5 +321,19 @@ namespace ClipboardViewer
         public static string[] moji = new string[9];
         public static bool ToClipboardButton = false;
     }
+
+    public class property
+    {
+        //normal / min /
+        public static StringBuilder StartMode = new StringBuilder();
+        //normal / min
+        public static StringBuilder CloseButton = new StringBuilder();
+
+        public static void init(){
+            StartMode.Append("normal");
+            CloseButton.Append("exit");
+        }
+    }
+
 
 }

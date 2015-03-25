@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Text;
 using System.Runtime.InteropServices;
-
+using System.IO;
 
 namespace ClipboardViewer
 {
@@ -17,6 +17,10 @@ namespace ClipboardViewer
         [STAThread]
         static void Main()
         {
+
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -28,10 +32,54 @@ namespace ClipboardViewer
             {
                 Clipboard.SetDataObject(Clipboard.GetText(), true);
             }
+
+            //iniファイルの作成
+            using (FileStream fs = File.Create(Form1.iniFileName))
+            {
+                // ファイルストリームを閉じて、変更を確定させる
+                // 呼ばなくても using を抜けた時点で Dispose メソッドが呼び出される
+                fs.Close();
+            }
+
+
+            iniWrite.WritePrivateProfileString(
+                            "SETTINGS",      // セクション名
+                            "StartMode",          // キー名
+                            property.StartMode.ToString(),     // 書き込む値
+                            Form1.iniFileName);   // iniファイル名
+            
+            iniWrite.WritePrivateProfileString(
+                "SETTINGS", "CloseButton",
+                property.CloseButton.ToString(),
+                Form1.iniFileName);
+
+
         }
     }
 }
 
+
+
+namespace ClipboardViewer
+{
+    //iniファイル読み書き用の関数を宣言
+    class iniWrite
+    {
+        [DllImport("KERNEL32.DLL")]
+        public static extern uint WritePrivateProfileString(
+          string lpAppName,
+          string lpKeyName,
+          string lpString,
+          string lpFileName);
+
+        [DllImport("KERNEL32.DLL")]
+        public static extern uint GetPrivateProfileString(
+            string lpAppName,
+            string lpKeyName, string lpDefault,
+            StringBuilder lpReturnedString, uint nSize,
+            string lpFileName);
+    }
+}
 
 namespace ClipboardViewer
 {

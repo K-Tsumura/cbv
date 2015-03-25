@@ -64,6 +64,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.コンパクトにするToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.元の大きさに戻すToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -325,9 +327,11 @@
             this.終了ToolStripMenuItem,
             this.toolStripMenuItem1,
             this.コンパクトにするToolStripMenuItem,
-            this.元の大きさに戻すToolStripMenuItem});
+            this.元の大きさに戻すToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.設定ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 104);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 終了ToolStripMenuItem
@@ -356,6 +360,18 @@
             this.元の大きさに戻すToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.元の大きさに戻すToolStripMenuItem.Text = "元の大きさに戻す";
             this.元の大きさに戻すToolStripMenuItem.Click += new System.EventHandler(this.元の大きさに戻すToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 6);
+            // 
+            // 設定ToolStripMenuItem
+            // 
+            this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
+            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.設定ToolStripMenuItem.Text = "設定";
+            this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -394,6 +410,8 @@
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ClipBoard Viewer Ver1.0";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
@@ -442,6 +460,8 @@
         private System.Windows.Forms.ToolStripMenuItem 元の大きさに戻すToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 終了ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 設定ToolStripMenuItem;
     }
 }
 
