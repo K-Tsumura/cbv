@@ -47,6 +47,9 @@ namespace ClipboardViewer
                 "SETTINGS","CloseButton","exit",
                 property.CloseButton,Convert.ToUInt32(property.StartMode.Capacity),iniFileName);
 
+            iniWrite.GetPrivateProfileString(
+                "SETTINGS", "TopMost", "false",
+                property.TopMost, Convert.ToUInt32(property.TopMost.Capacity), iniFileName);
 
 
 
@@ -168,10 +171,14 @@ namespace ClipboardViewer
             if (this.checkBox1.Checked)
             {
                 TopMost = true;
+                property.TopMost.Clear();
+                property.TopMost.Append("true");
             }
             else
             {
                 TopMost = false;
+                property.TopMost.Clear();
+                property.TopMost.Append("false");
             }
 
         }
@@ -313,6 +320,20 @@ namespace ClipboardViewer
             }
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (property.TopMost.ToString() == "true")
+            {
+                this.TopMost = true;
+                this.checkBox1.Checked = true;
+            }
+            else
+            {
+                this.TopMost = false;
+                this.checkBox1.Checked = false;
+            }
+        }
+
 
     }
 
@@ -328,10 +349,13 @@ namespace ClipboardViewer
         public static StringBuilder StartMode = new StringBuilder();
         //normal / min
         public static StringBuilder CloseButton = new StringBuilder();
+        //true / false
+        public static StringBuilder TopMost = new StringBuilder();
 
         public static void init(){
             StartMode.Append("normal");
             CloseButton.Append("exit");
+            TopMost.Append("false");
         }
     }
 

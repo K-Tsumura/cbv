@@ -11,15 +11,14 @@ namespace ClipboardViewer
 {
     static class Program
     {
+        public static string AppName = "ClipBoardViewer Ver1.0.1";
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
         static void Main()
         {
-
-
-
+            
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -36,21 +35,23 @@ namespace ClipboardViewer
             //iniファイルの作成
             using (FileStream fs = File.Create(Form1.iniFileName))
             {
-                // ファイルストリームを閉じて、変更を確定させる
-                // 呼ばなくても using を抜けた時点で Dispose メソッドが呼び出される
                 fs.Close();
             }
 
 
             iniWrite.WritePrivateProfileString(
-                            "SETTINGS",      // セクション名
-                            "StartMode",          // キー名
-                            property.StartMode.ToString(),     // 書き込む値
-                            Form1.iniFileName);   // iniファイル名
+                "SETTINGS", "StartMode",
+                property.StartMode.ToString(),
+                Form1.iniFileName);
             
             iniWrite.WritePrivateProfileString(
                 "SETTINGS", "CloseButton",
                 property.CloseButton.ToString(),
+                Form1.iniFileName);
+
+            iniWrite.WritePrivateProfileString(
+                "SETTINGS", "TopMost",
+                property.TopMost.ToString(),
                 Form1.iniFileName);
 
 

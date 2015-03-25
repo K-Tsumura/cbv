@@ -304,7 +304,8 @@
             // 
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip2;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "クリップボードビュワー Ver1.0";
+            //this.notifyIcon1.Text = "クリップボードビュワー Ver1.0";
+            this.notifyIcon1.Text = Program.AppName;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseDoubleClick);
             // 
             // contextMenuStrip2
@@ -409,8 +410,10 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "ClipBoard Viewer Ver1.0";
+            //this.Text = "ClipBoard Viewer Ver1.0.1";
+            this.Text = Program.AppName;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
