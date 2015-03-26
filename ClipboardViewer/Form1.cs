@@ -51,6 +51,26 @@ namespace ClipboardViewer
                 "SETTINGS", "TopMost", "false",
                 property.TopMost, Convert.ToUInt32(property.TopMost.Capacity), iniFileName);
 
+            StringBuilder buff1 = new StringBuilder(10);
+
+            iniWrite.GetPrivateProfileString(
+                "COLOR", "BackColor", "f0f0f0",
+                buff1, 10, iniFileName);
+
+            property.BackColor = Color.FromArgb(Convert.ToInt32("ff" + buff1.ToString(), 16));
+
+
+            StringBuilder buff2 = new StringBuilder(10);
+
+            property.BackColor = Color.FromArgb(Convert.ToInt32("ff"+buff1.ToString(),16));
+
+            iniWrite.GetPrivateProfileString(
+                "COLOR", "TextBoxBackColor", "ffffff",
+                buff2, 10, iniFileName);
+
+            Console.Write(buff2);
+
+            property.TextBoxBackColor = Color.FromArgb(Convert.ToInt32("ff" + buff2.ToString(),16));
 
 
         }
@@ -105,6 +125,8 @@ namespace ClipboardViewer
             this.textBox6.Text = val.moji[5];
             this.textBox7.Text = val.moji[6];
             this.textBox8.Text = val.moji[7];
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -290,7 +312,7 @@ namespace ClipboardViewer
 
         private void 設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Config1 ConfForm1 = new Config1();
+            Config1 ConfForm1 = new Config1(this);
             ConfForm1.ShowDialog();
         }
 
@@ -332,6 +354,23 @@ namespace ClipboardViewer
                 this.TopMost = false;
                 this.checkBox1.Checked = false;
             }
+
+            BackColor = property.BackColor;
+            
+            textBox1.BackColor = property.TextBoxBackColor;
+            textBox2.BackColor = property.TextBoxBackColor;
+            textBox3.BackColor = property.TextBoxBackColor;
+            textBox4.BackColor = property.TextBoxBackColor;
+            textBox5.BackColor = property.TextBoxBackColor;
+            textBox6.BackColor = property.TextBoxBackColor;
+            textBox7.BackColor = property.TextBoxBackColor;
+            textBox8.BackColor = property.TextBoxBackColor;
+            
+        }
+
+        private void 設定ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            設定ToolStripMenuItem_Click(sender, e);
         }
 
 
@@ -352,10 +391,15 @@ namespace ClipboardViewer
         //true / false
         public static StringBuilder TopMost = new StringBuilder();
 
+        public static Color BackColor;
+        public static Color TextBoxBackColor;
+
         public static void init(){
             StartMode.Append("normal");
             CloseButton.Append("exit");
             TopMost.Append("false");
+            BackColor = Color.FromArgb(0xff,0xf0, 0xf0, 0xf0);
+            TextBoxBackColor = Color.FromArgb(0xff,0xff, 0xff, 0xff);
         }
     }
 

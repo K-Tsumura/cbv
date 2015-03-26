@@ -16,9 +16,11 @@ namespace ClipboardViewer
         private StringBuilder buffStartMode = new StringBuilder();
         private StringBuilder buffCloseButton = new StringBuilder();
 
+        Form1 mainForm;
 
-        public Config1()
+        public Config1(Form1 f)
         {
+            mainForm = f;
             InitializeComponent();
             if (property.StartMode.ToString() == "min")
             {
@@ -83,6 +85,51 @@ namespace ClipboardViewer
             {
                 buffCloseButton.Clear();
                 buffCloseButton.Append("normal");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //ColorDialogクラスのインスタンスを作成
+            ColorDialog cd = new ColorDialog();
+
+            //はじめに選択されている色を設定
+            cd.Color = BackColor;
+            //色の作成部分を表示可能にする
+            //デフォルトがTrueのため必要はない
+            cd.AllowFullOpen = true;
+            //純色だけに制限しない
+            //デフォルトがFalseのため必要はない
+            cd.SolidColorOnly = false;
+
+            //ダイアログを表示する
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                //選択された色の取得
+                mainForm.BackColor = cd.Color;
+                property.BackColor = cd.Color;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd2 = new ColorDialog();
+            //cd2.Color = BackColor;
+            cd2.AllowFullOpen = true;
+            cd2.SolidColorOnly = false;
+
+            if (cd2.ShowDialog() == DialogResult.OK)
+            {
+                mainForm.textBox1.BackColor = cd2.Color;
+                mainForm.textBox2.BackColor = cd2.Color;
+                mainForm.textBox3.BackColor = cd2.Color;
+                mainForm.textBox4.BackColor = cd2.Color;
+                mainForm.textBox5.BackColor = cd2.Color;
+                mainForm.textBox6.BackColor = cd2.Color;
+                mainForm.textBox7.BackColor = cd2.Color;
+                mainForm.textBox8.BackColor = cd2.Color;
+
+                property.TextBoxBackColor = cd2.Color;
             }
         }
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text;
+using System.Drawing;
+
 using System.Runtime.InteropServices;
 using System.IO;
 
@@ -11,7 +13,7 @@ namespace ClipboardViewer
 {
     static class Program
     {
-        public static string AppName = "ClipBoardViewer Ver1.0.1";
+        public static string AppName = "ClipBoardViewer Ver1.0.2";
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -53,6 +55,17 @@ namespace ClipboardViewer
                 "SETTINGS", "TopMost",
                 property.TopMost.ToString(),
                 Form1.iniFileName);
+
+            iniWrite.WritePrivateProfileString(
+                "COLOR", "BackColor",
+                property.BackColor.R.ToString("x2") + property.BackColor.G.ToString("x2") + property.BackColor.B.ToString("x2"),
+                Form1.iniFileName);
+
+            iniWrite.WritePrivateProfileString(
+                "COLOR", "TextBoxBackColor",
+                property.TextBoxBackColor.R.ToString("x2") + property.TextBoxBackColor.G.ToString("x2") + property.TextBoxBackColor.B.ToString("x2"),
+                Form1.iniFileName);
+            
 
 
         }
