@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
+using System.Security;
+using System.Security.Permissions;
+
 
 
 namespace ClipboardViewer
@@ -131,6 +135,86 @@ namespace ClipboardViewer
 
                 property.TextBoxBackColor = cd2.Color;
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            DialogResult result = MessageBox.Show(
+                "スタートアップに登録しますか？\n" +
+                "レジストリに書き込みます。\n\n" +
+                "キー = HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\n" +
+                "名前 = " + Application.ProductName + "\n" +
+                "値 = " + Application.ExecutablePath,
+                "スタートアップ登録",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2
+            );
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    //レジストリ(スタートアップ)に登録する
+                    //Runキーを開く
+                    Microsoft.Win32.RegistryKey regkey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(
+                            @"Software\Microsoft\Windows\CurrentVersion\Run");
+
+                    //値の名前に製品名、値のデータに実行ファイルのパスを指定し、書き込む
+                    regkey.SetValue(Application.ProductName, Application.ExecutablePath);
+
+                    //閉じる
+                    regkey.Close();
+                }
+                catch (Exception ee)
+                {
+                    MessageBox.Show(
+                        "以下の例外が発生しました\nException: " + ee.Message +"\nレジストリへのアクセス許可がない可能性があります。",
+                        "エラー",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                        );
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "スタートアップを解除しますか？\n" +
+                "レジストリから削除します",
+                "スタートアップ解除",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2
+            );
+
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    Microsoft.Win32.RegistryKey regkey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(
+                        @"Software\Microsoft\Windows\CurrentVersion\Run");
+
+                    regkey.DeleteValue(Application.ProductName);
+
+                    regkey.Close();
+                }
+                catch (Exception ee)
+                {
+                    MessageBox.Show(
+                        "以下の例外が発生しました\nException: " + ee.Message+"\nすでにスタートアップには登録されていない可能性があります。",
+                        "エラー",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                        );
+
+                }
+            }
+
+
         }
 
 
