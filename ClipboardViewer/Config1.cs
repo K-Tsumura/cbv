@@ -197,15 +197,14 @@ namespace ClipboardViewer
                 {
                     Microsoft.Win32.RegistryKey regkey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(
                         @"Software\Microsoft\Windows\CurrentVersion\Run");
-
                     regkey.DeleteValue(Application.ProductName);
-
                     regkey.Close();
+
                 }
                 catch (Exception ee)
                 {
                     MessageBox.Show(
-                        "以下の例外が発生しました\nException: " + ee.Message+"\nすでにスタートアップには登録されていない可能性があります。",
+                        "以下の例外が発生しました\nException: " + ee.Message+"\nレジストリへのアクセス許可がないか、すでにスタートアップには登録されていない可能性があります。",
                         "エラー",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error

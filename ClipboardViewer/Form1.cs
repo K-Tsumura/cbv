@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;   // iniファイル読み込み用
 
 namespace ClipboardViewer
 {
+
     public partial class Form1 : Form
     {
         private MyClipboardViewer viewer;
@@ -113,6 +114,8 @@ namespace ClipboardViewer
             }
             val.moji[0] = args.Text;
             textBoxReDraw();
+
+
         }
 
         public void textBoxReDraw()
