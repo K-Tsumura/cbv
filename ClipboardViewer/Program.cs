@@ -13,7 +13,7 @@ namespace ClipboardViewer
 {
     static class Program
     {
-        public static string AppName = "ClipBoardViewer Ver1.0.2";
+        public static string AppName = "ClipBoardViewer Ver1.1";
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
