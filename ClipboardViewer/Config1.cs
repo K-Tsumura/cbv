@@ -19,6 +19,7 @@ namespace ClipboardViewer
     {
         private StringBuilder buffStartMode = new StringBuilder();
         private StringBuilder buffCloseButton = new StringBuilder();
+        private StringBuilder buffExitLogSave = new StringBuilder();
 
         Form1 mainForm;
 
@@ -43,18 +44,26 @@ namespace ClipboardViewer
             {
                 checkBox2.Checked = false;
             }
+
+            if (property.exitLogSave.ToString() == "true")
+            {
+                checkBox3.Checked = true;
+            }
+            else
+            {
+                checkBox3.Checked = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             property.StartMode = buffStartMode;
             property.CloseButton = buffCloseButton;
+            property.exitLogSave = buffExitLogSave;
 
-            Console.Write("\n\nclose:");
-            Console.Write(property.CloseButton.ToString());
 
-            Console.Write("\nstartmode:");
-            Console.Write(property.StartMode.ToString());
+            //設定画面を閉じるときは更新されたかもしれないのですべてのプロパティをiniファイルに書き込む
+            iniWrite.WriteAllProperty();
 
             Close();
         }
@@ -91,6 +100,21 @@ namespace ClipboardViewer
                 buffCloseButton.Append("normal");
             }
         }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox3.Checked)
+            {
+                buffExitLogSave.Clear();
+                buffExitLogSave.Append("true");
+            }
+            else
+            {
+                buffExitLogSave.Clear();
+                buffExitLogSave.Append("false");
+            }
+        }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -215,6 +239,7 @@ namespace ClipboardViewer
 
 
         }
+
 
 
     }

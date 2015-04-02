@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;   // iniファイル読み込み用
@@ -29,6 +29,10 @@ namespace ClipboardViewer
             // イベントハンドラを登録
             viewer.ClipboardHandler += this.OnClipBoardChanged;
             InitializeComponent();
+
+            //フォーム類の名前を変更する
+            this.notifyIcon1.Text = Program.AppName;
+            this.Text = Program.AppName;
 
 
             //property変数の初期化
@@ -52,6 +56,14 @@ namespace ClipboardViewer
                 "SETTINGS", "TopMost", "false",
                 property.TopMost, Convert.ToUInt32(property.TopMost.Capacity), iniFileName);
 
+
+            iniWrite.GetPrivateProfileString(
+                "SETTINGS", "ExitLogSave", "true",
+                property.exitLogSave, Convert.ToUInt32(property.exitLogSave.Capacity), iniFileName);
+
+
+
+
             StringBuilder buff1 = new StringBuilder(10);
 
             iniWrite.GetPrivateProfileString(
@@ -74,13 +86,28 @@ namespace ClipboardViewer
             property.TextBoxBackColor = Color.FromArgb(Convert.ToInt32("ff" + buff2.ToString(),16));
 
 
+            
+            if (property.exitLogSave.ToString() == "true")
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    try
+                    {
+                        val.moji[i] = File.ReadAllText("log" + (i + 1).ToString() + ".txt");
+                    }
+                    catch (Exception e)
+                    {
+                        
+                    }
+                }
+            }
+
+
         }
 
         // クリップボードにテキストがコピーされると呼び出される
         private void OnClipBoardChanged(object sender, ClipboardEventArgs args)
         {
-
-            //Console.WriteLine("OnClipboardChanged:" + val.ToClipboardButton);
 
             //改行、スペース、タブを半角スペースに置き換えて表示する
             this.label1.Text = Regex.Replace(args.Text, "(　| |\t|\r\n)", "");
@@ -90,10 +117,6 @@ namespace ClipboardViewer
                 val.ToClipboardButton = false;
                 return;
             }
-
-            //gitがこの行をちゃんと反映してくれるかのテスト（二回目）
-
-
 
             for (int j = 0; j < val.moji.Length - 1; j++)
             {
@@ -114,8 +137,6 @@ namespace ClipboardViewer
             }
             val.moji[0] = args.Text;
             textBoxReDraw();
-
-
         }
 
         public void textBoxReDraw()
@@ -128,8 +149,6 @@ namespace ClipboardViewer
             this.textBox6.Text = val.moji[5];
             this.textBox7.Text = val.moji[6];
             this.textBox8.Text = val.moji[7];
-
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -158,36 +177,30 @@ namespace ClipboardViewer
         {
             val.ToClipboardButton = true;
             Clipboard.SetDataObject(this.textBox4.Text, false);
-            
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             val.ToClipboardButton = true;
             Clipboard.SetDataObject(this.textBox5.Text, false);
-            
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             val.ToClipboardButton = true;
             Clipboard.SetDataObject(this.textBox6.Text, false);
-            
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             val.ToClipboardButton = true;
             Clipboard.SetDataObject(this.textBox7.Text, false);
-            
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             val.ToClipboardButton = true;
             Clipboard.SetDataObject(this.textBox8.Text, false);
-            
         }
 
 
@@ -393,6 +406,8 @@ namespace ClipboardViewer
         public static StringBuilder CloseButton = new StringBuilder();
         //true / false
         public static StringBuilder TopMost = new StringBuilder();
+        //ture / false
+        public static StringBuilder exitLogSave = new StringBuilder();
 
         public static Color BackColor;
         public static Color TextBoxBackColor;
@@ -401,6 +416,7 @@ namespace ClipboardViewer
             StartMode.Append("normal");
             CloseButton.Append("exit");
             TopMost.Append("false");
+            exitLogSave.Append("true");
             BackColor = Color.FromArgb(0xff,0xf0, 0xf0, 0xf0);
             TextBoxBackColor = Color.FromArgb(0xff,0xff, 0xff, 0xff);
         }
