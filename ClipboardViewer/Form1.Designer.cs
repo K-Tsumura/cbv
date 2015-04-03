@@ -58,8 +58,9 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.終了ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.設定ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.終了ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.終了ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,7 +68,6 @@
             this.元の大きさに戻すToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -335,21 +335,26 @@
             this.toolStripMenuItem3,
             this.終了ToolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(153, 76);
-            // 
-            // 終了ToolStripMenuItem1
-            // 
-            this.終了ToolStripMenuItem1.Name = "終了ToolStripMenuItem1";
-            this.終了ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.終了ToolStripMenuItem1.Text = "終了";
-            this.終了ToolStripMenuItem1.Click += new System.EventHandler(this.終了ToolStripMenuItem1_Click);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 54);
             // 
             // 設定ToolStripMenuItem1
             // 
             this.設定ToolStripMenuItem1.Name = "設定ToolStripMenuItem1";
-            this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.設定ToolStripMenuItem1.Text = "設定";
             this.設定ToolStripMenuItem1.Click += new System.EventHandler(this.設定ToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(97, 6);
+            // 
+            // 終了ToolStripMenuItem1
+            // 
+            this.終了ToolStripMenuItem1.Name = "終了ToolStripMenuItem1";
+            this.終了ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.終了ToolStripMenuItem1.Text = "終了";
+            this.終了ToolStripMenuItem1.Click += new System.EventHandler(this.終了ToolStripMenuItem1_Click);
             // 
             // contextMenuStrip1
             // 
@@ -402,11 +407,6 @@
             this.設定ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.設定ToolStripMenuItem.Text = "設定";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
             // 
             // Form1
             // 

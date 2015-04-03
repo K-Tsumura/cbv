@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Threading;
 
 namespace ClipboardViewer
 {
@@ -15,15 +16,13 @@ namespace ClipboardViewer
     {
         //アプリケーション名です
         //メインフォームのテキストだったり通知領域アイコンの名前だったり。
-        public static string AppName = "ClipBoardViewer Ver1.2.1";
+        public static string AppName = "ClipBoardViewer Ver1.3";
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
         static void Main()
         {
-
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -48,10 +47,11 @@ namespace ClipboardViewer
                     using (StreamWriter writer = new StreamWriter("./log" + (i + 1).ToString() + ".txt", false))
                     {
                         writer.Write(val.moji[i]);
-                        Console.Write(val.moji[i]+"\n\n");
+                        //Console.Write(val.moji[i]+"\n\n");
                     }
                 }
             }
+
 
         }
     }
@@ -121,6 +121,54 @@ namespace ClipboardViewer
         }
     }
 
+
+    public class HotKey{
+        // HotKey登録関数
+        // 登録に失敗(他のアプリが使用中)の場合は、0が返却されます。
+        [DllImport("user32.dll")]
+        extern static int RegisterHotKey(IntPtr hWnd, int id, int modKey, int key);
+
+        // HotKey解除関数
+        // 解除に失敗した場合は、0が返却されます。
+        [DllImport("user32.dll")]
+        extern static int UnregisterHotKey(IntPtr HWnd, int ID);
+
+        public static void EntryHotKey(IntPtr Handle)
+        {
+            //(Handle,  Ctrl?Alt?Shift?,  ホットキーID(識別子),  key)
+            if(RegisterHotKey(Handle, 0x01, 0x02, (int) Keys.D1) == 0){
+                MessageBox.Show("「Ctrl+1」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります","エラー発生",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            if (RegisterHotKey(Handle, 0x02, 0x02, (int)Keys.D2) == 0)
+            {
+                MessageBox.Show("「Ctrl+2」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります", "エラー発生", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (RegisterHotKey(Handle, 0x03, 0x02, (int)Keys.D3) == 0)
+            {
+                MessageBox.Show("「Ctrl+3」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります", "エラー発生", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (RegisterHotKey(Handle, 0x04, 0x02, (int)Keys.D4) == 0)
+            {
+                MessageBox.Show("「Ctrl+4」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります", "エラー発生", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (RegisterHotKey(Handle, 0x05, 0x02, (int)Keys.D5) == 0)
+            {
+                MessageBox.Show("「Ctrl+5」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります", "エラー発生", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (RegisterHotKey(Handle, 0x06, 0x02, (int)Keys.D6) == 0)
+            {
+                MessageBox.Show("「Ctrl+6」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります", "エラー発生", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (RegisterHotKey(Handle, 0x07, 0x02, (int)Keys.D7) == 0)
+            {
+                MessageBox.Show("「Ctrl+7」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります", "エラー発生", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (RegisterHotKey(Handle, 0x08, 0x02, (int)Keys.D8) == 0)
+            {
+                MessageBox.Show("「Ctrl+8」は既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります", "エラー発生", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
 
 }
 

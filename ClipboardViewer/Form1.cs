@@ -103,6 +103,9 @@ namespace ClipboardViewer
             }
 
 
+            //ホットキーの一括登録
+            HotKey.EntryHotKey(this.Handle);
+
         }
 
         // クリップボードにテキストがコピーされると呼び出される
@@ -150,6 +153,50 @@ namespace ClipboardViewer
             this.textBox7.Text = val.moji[6];
             this.textBox8.Text = val.moji[7];
         }
+
+        //Winメッセージが来ると呼び出される。とりあえず今はホットキーについて使用してる。
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+
+            //ホットキー検出
+            if (m.Msg == 0x0312)
+            {
+                if((int)m.WParam == 0x01){
+                    button1_Click(null,null);
+                }
+                if ((int)m.WParam == 0x02)
+                {
+                    button2_Click(null, null);
+                }
+                if ((int)m.WParam == 0x03)
+                {
+                    button3_Click(null, null);
+                }
+                if ((int)m.WParam == 0x04)
+                {
+                    button4_Click(null, null);
+                }
+                if ((int)m.WParam == 0x05)
+                {
+                    button5_Click(null, null);
+                }
+                if ((int)m.WParam == 0x06)
+                {
+                    button6_Click(null, null);
+                }
+                if ((int)m.WParam == 0x07)
+                {
+                    button7_Click(null, null);
+                }
+                if ((int)m.WParam == 0x08)
+                {
+                    button8_Click(null, null);
+                }
+            }
+        }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
