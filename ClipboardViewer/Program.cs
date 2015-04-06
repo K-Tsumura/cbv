@@ -155,7 +155,7 @@ namespace ClipboardViewer
             //(Handle,  Ctrl?Alt?Shift?,  ホットキーID(識別子),  key)
             if (RegisterHotKey(Handle, 0x01, property.HotKeyModifiers, (int)Keys.D1) == 0)
             {
-                MessageBox.Show("1:"+property.HotKeyModifiers+"指定されたキーの組み合わせは既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります","エラー発生",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("1:指定されたキーの組み合わせは既に使用されているホットキーです。アプリケーションは動作しますが、このホットキーは無効になります","エラー発生",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             if (RegisterHotKey(Handle, 0x02, property.HotKeyModifiers, (int)Keys.D2) == 0)
             {

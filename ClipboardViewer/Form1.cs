@@ -181,34 +181,66 @@ namespace ClipboardViewer
             {
                 if((int)m.WParam == 0x01){
                     button1_Click(null,null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
                 if ((int)m.WParam == 0x02)
                 {
                     button2_Click(null, null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
                 if ((int)m.WParam == 0x03)
                 {
                     button3_Click(null, null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
                 if ((int)m.WParam == 0x04)
                 {
                     button4_Click(null, null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
                 if ((int)m.WParam == 0x05)
                 {
                     button5_Click(null, null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
                 if ((int)m.WParam == 0x06)
                 {
                     button6_Click(null, null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
                 if ((int)m.WParam == 0x07)
                 {
                     button7_Click(null, null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
                 if ((int)m.WParam == 0x08)
                 {
                     button8_Click(null, null);
+                    if (property.PasteByHotKey)
+                    {
+                        SendKeys.Send("^(v)");
+                    }
                 }
             }
         }

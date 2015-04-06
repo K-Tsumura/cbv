@@ -213,6 +213,18 @@ namespace ClipboardViewer
 
         }
 
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked)
+            {
+                property.PasteByHotKey = true;
+            }
+            else
+            {
+                property.PasteByHotKey = false;
+            }
+        }
+
 
 
 

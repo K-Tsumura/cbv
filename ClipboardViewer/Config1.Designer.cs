@@ -162,6 +162,7 @@
             this.checkBox4.TabIndex = 11;
             this.checkBox4.Text = "ホットキーで貼り付けまで行う";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // button7
             // 
