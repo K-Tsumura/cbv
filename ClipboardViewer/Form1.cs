@@ -49,23 +49,35 @@ namespace ClipboardViewer
                 iniFileName);                                   // iniファイル名
 
             iniWrite.GetPrivateProfileString(
-                "SETTINGS","CloseButton","exit",
+                "SETTINGS","CloseButton","False",
                 property.CloseButton,Convert.ToUInt32(property.StartMode.Capacity),iniFileName);
 
             iniWrite.GetPrivateProfileString(
-                "SETTINGS", "TopMost", "false",
+                "SETTINGS", "TopMost", "False",
                 property.TopMost, Convert.ToUInt32(property.TopMost.Capacity), iniFileName);
 
 
             iniWrite.GetPrivateProfileString(
-                "SETTINGS", "ExitLogSave", "true",
+                "SETTINGS", "ExitLogSave", "True",
                 property.exitLogSave, Convert.ToUInt32(property.exitLogSave.Capacity), iniFileName);
-
-
-
 
             StringBuilder buff1 = new StringBuilder(10);
 
+            iniWrite.GetPrivateProfileString(
+                "SETTINGS", "PasteByHotKey", "False",
+                buff1, 10, iniFileName);
+
+            if (buff1.ToString() == "True" || buff1.ToString() == "true")
+            {
+                property.PasteByHotKey = true;
+            }
+            else
+            {
+                property.PasteByHotKey = false;
+            }
+
+            buff1.Clear();
+            
             iniWrite.GetPrivateProfileString(
                 "COLOR", "BackColor", "f0f0f0",
                 buff1, 10, iniFileName);
@@ -73,21 +85,26 @@ namespace ClipboardViewer
             property.BackColor = Color.FromArgb(Convert.ToInt32("ff" + buff1.ToString(), 16));
 
 
-            StringBuilder buff2 = new StringBuilder(10);
-
-            property.BackColor = Color.FromArgb(Convert.ToInt32("ff"+buff1.ToString(),16));
 
             iniWrite.GetPrivateProfileString(
                 "COLOR", "TextBoxBackColor", "ffffff",
+                buff1, 10, iniFileName);
+
+
+            property.TextBoxBackColor = Color.FromArgb(Convert.ToInt32("ff" + buff1.ToString(), 16));
+
+
+            StringBuilder buff2 = new StringBuilder();
+
+            iniWrite.GetPrivateProfileString(
+                "HOTKEY", "Modifers", "2",
                 buff2, 10, iniFileName);
 
-            Console.Write(buff2);
-
-            property.TextBoxBackColor = Color.FromArgb(Convert.ToInt32("ff" + buff2.ToString(),16));
+            property.HotKeyModifiers = Int32.Parse(buff2.ToString());
 
 
             
-            if (property.exitLogSave.ToString() == "true")
+            if (property.exitLogSave.ToString() == "True")
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -257,13 +274,13 @@ namespace ClipboardViewer
             {
                 TopMost = true;
                 property.TopMost.Clear();
-                property.TopMost.Append("true");
+                property.TopMost.Append("True");
             }
             else
             {
                 TopMost = false;
                 property.TopMost.Clear();
-                property.TopMost.Append("false");
+                property.TopMost.Append("False");
             }
 
         }
@@ -275,9 +292,6 @@ namespace ClipboardViewer
         }
         
         
-        private void Form1_ResizeEnd(object sender, EventArgs e)
-        {
-        }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
@@ -291,6 +305,9 @@ namespace ClipboardViewer
                 this.notifyIcon1.Visible = false;
                 this.ShowInTaskbar = true;
             }
+
+            //ホットキーの一括登録
+            HotKey.EntryHotKey(this.Handle);
 
         }
 
@@ -381,13 +398,16 @@ namespace ClipboardViewer
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (property.CloseButton.ToString() == "min")
+            if (property.CloseButton.ToString() == "True")
             {
-                e.Cancel = true;
-                this.WindowState = FormWindowState.Minimized;
-
+                //閉じる理由が、ユーザークローズだったら最小化する。
+                if (e.CloseReason == CloseReason.UserClosing)
+                {
+                    e.Cancel = true;
+                    this.WindowState = FormWindowState.Minimized;
+                }
             }
-           else if (property.CloseButton.ToString() == "exit")
+            else if (property.CloseButton.ToString() == "False")
             {
                 //そのまま閉じてもらう
             }
@@ -395,11 +415,11 @@ namespace ClipboardViewer
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            if (property.StartMode.ToString() == "min")
+            if (property.StartMode.ToString() == "True")
             {
                 this.WindowState = FormWindowState.Minimized;
             }
-            else if (property.StartMode.ToString() == "normal")
+            else if (property.StartMode.ToString() == "False")
             {
                 this.WindowState = FormWindowState.Normal;
             }
@@ -407,7 +427,7 @@ namespace ClipboardViewer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (property.TopMost.ToString() == "true")
+            if (property.TopMost.ToString() == "True")
             {
                 this.TopMost = true;
                 this.checkBox1.Checked = true;
@@ -456,8 +476,13 @@ namespace ClipboardViewer
         //ture / false
         public static StringBuilder exitLogSave = new StringBuilder();
 
+        public static int HotKeyModifiers;
+
+
         public static Color BackColor;
         public static Color TextBoxBackColor;
+        public static bool PasteByHotKey;
+
 
         public static void init(){
             StartMode.Append("normal");
@@ -466,6 +491,8 @@ namespace ClipboardViewer
             exitLogSave.Append("true");
             BackColor = Color.FromArgb(0xff,0xf0, 0xf0, 0xf0);
             TextBoxBackColor = Color.FromArgb(0xff,0xff, 0xff, 0xff);
+            PasteByHotKey = true;
+            HotKeyModifiers = 0x02;
         }
     }
 

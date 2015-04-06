@@ -17,17 +17,13 @@ namespace ClipboardViewer
 {
     public partial class Config1 : Form
     {
-        private StringBuilder buffStartMode = new StringBuilder();
-        private StringBuilder buffCloseButton = new StringBuilder();
-        private StringBuilder buffExitLogSave = new StringBuilder();
-
         Form1 mainForm;
 
         public Config1(Form1 f)
         {
             mainForm = f;
             InitializeComponent();
-            if (property.StartMode.ToString() == "min")
+            if (property.StartMode.ToString() == "True")
             {
                 checkBox1.Checked = true;
             }
@@ -36,7 +32,7 @@ namespace ClipboardViewer
                 checkBox1.Checked = false;
             }
 
-            if (property.CloseButton.ToString() == "min")
+            if (property.CloseButton.ToString() == "True")
             {
                 checkBox2.Checked = true;
             }
@@ -45,7 +41,7 @@ namespace ClipboardViewer
                 checkBox2.Checked = false;
             }
 
-            if (property.exitLogSave.ToString() == "true")
+            if (property.exitLogSave.ToString() == "True")
             {
                 checkBox3.Checked = true;
             }
@@ -53,13 +49,26 @@ namespace ClipboardViewer
             {
                 checkBox3.Checked = false;
             }
+
+
+            checkBox4.Checked = property.PasteByHotKey;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            property.StartMode = buffStartMode;
-            property.CloseButton = buffCloseButton;
-            property.exitLogSave = buffExitLogSave;
+
+            property.StartMode.Clear();
+            property.StartMode.Append(checkBox1.Checked.ToString());
+
+            property.CloseButton.Clear();
+            property.CloseButton.Append(checkBox2.Checked.ToString());
+
+            property.exitLogSave.Clear();
+            property.exitLogSave.Append(checkBox3.Checked.ToString());
+
+            property.PasteByHotKey = checkBox4.Checked;
+
 
 
             //設定画面を閉じるときは更新されたかもしれないのですべてのプロパティをiniファイルに書き込む
@@ -72,49 +81,6 @@ namespace ClipboardViewer
         {
             Close();
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                buffStartMode.Clear();
-                buffStartMode.Append("min");
-            }
-            else
-            {
-                buffStartMode.Clear();
-                buffStartMode.Append("normal");
-            }
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked)
-            {
-                buffCloseButton.Clear();
-                buffCloseButton.Append("min");
-            }
-            else
-            {
-                buffCloseButton.Clear();
-                buffCloseButton.Append("normal");
-            }
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            if(checkBox3.Checked)
-            {
-                buffExitLogSave.Clear();
-                buffExitLogSave.Append("true");
-            }
-            else
-            {
-                buffExitLogSave.Clear();
-                buffExitLogSave.Append("false");
-            }
-        }
-
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -239,6 +205,15 @@ namespace ClipboardViewer
 
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            KeyConfig f = new KeyConfig(mainForm);
+            f.ShowDialog();
+
+        }
+
+
 
 
 
