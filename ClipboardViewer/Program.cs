@@ -16,13 +16,25 @@ namespace ClipboardViewer
     {
         //アプリケーション名です
         //メインフォームのテキストだったり通知領域アイコンの名前だったり。
-        public static string AppName = "ClipBoardViewer Ver1.3.2";
+        public static string AppName = "ClipBoardViewer Ver1.3.3";
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
         static void Main()
         {
+            //二重起動をチェックする
+            if (System.Diagnostics.Process.GetProcessesByName(
+                System.Diagnostics.Process.GetCurrentProcess().ProcessName).Length > 1)
+            {
+                //すでに起動していると判断して終了
+                MessageBox.Show("多重起動はできません。","エラー",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
