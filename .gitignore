@@ -1,0 +1,5 @@
+/ClipboardViewer/*.user
+/ClipboardViewer/bin
+/ClipboardViewer/obj
+/ClipboardViewer/ClipboardViewer.csproj.user
+*.suo

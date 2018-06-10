@@ -16,7 +16,7 @@ namespace ClipboardViewer
     {
         //アプリケーション名です
         //メインフォームのテキストだったり通知領域アイコンの名前だったり。
-        public static string AppName = "ClipBoardViewer Ver1.3.3";
+        public static string AppName = "ClipBoardViewer Ver1.4";
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -28,7 +28,7 @@ namespace ClipboardViewer
                 System.Diagnostics.Process.GetCurrentProcess().ProcessName).Length > 1)
             {
                 //すでに起動していると判断して終了
-                MessageBox.Show("多重起動はできません。","エラー",
+                MessageBox.Show("多重起動はできません。終了します。","エラー",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
                 
@@ -38,6 +38,10 @@ namespace ClipboardViewer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+
+
+            //MessageBox.Show("Form1の直後");
 
             //フォームが閉じられるときは、現在クリップボードにあるテキストを
             //クリップボードにコピーする。第二引数がtrueなのでこのウインドウを閉じても
@@ -49,14 +53,14 @@ namespace ClipboardViewer
 
 
             //終了時にはすべてのプロパティを書き込む
-            iniWrite.WriteAllProperty();
+            //iniWrite.WriteAllProperty();
 
 
             if (property.exitLogSave.ToString() == "True")
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    using (StreamWriter writer = new StreamWriter("./log" + (i + 1).ToString() + ".txt", false))
+                    using (StreamWriter writer = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory +"log" + (i + 1).ToString() + ".txt", false))
                     {
                         writer.Write(val.moji[i]);
                         //Console.Write(val.moji[i]+"\n\n");
@@ -64,6 +68,8 @@ namespace ClipboardViewer
                 }
             }
 
+
+            MessageBox.Show("Log書き込み処理終了。アプリケーションは終了します。");
 
         }
     }
@@ -138,9 +144,6 @@ namespace ClipboardViewer
                 "HOTKEY","Modifers",
                 property.HotKeyModifiers.ToString(),
                 Form1.iniFileName);
-
-
-
 
         }
     }

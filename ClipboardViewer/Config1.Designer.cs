@@ -44,6 +44,7 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button7 = new System.Windows.Forms.Button();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBox2
@@ -58,7 +59,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(66, 222);
+            this.button1.Location = new System.Drawing.Point(66, 234);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 30);
             this.button1.TabIndex = 2;
@@ -68,7 +69,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(191, 222);
+            this.button2.Location = new System.Drawing.Point(191, 234);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 30);
             this.button2.TabIndex = 3;
@@ -88,7 +89,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(40, 131);
+            this.button3.Location = new System.Drawing.Point(40, 147);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -98,7 +99,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(165, 131);
+            this.button4.Location = new System.Drawing.Point(165, 147);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(127, 23);
             this.button4.TabIndex = 5;
@@ -109,7 +110,7 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(0, 212);
+            this.label1.Location = new System.Drawing.Point(0, 224);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(331, 2);
@@ -118,14 +119,14 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.LightGray;
-            this.label2.Location = new System.Drawing.Point(-2, 214);
+            this.label2.Location = new System.Drawing.Point(-2, 226);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(334, 46);
             this.label2.TabIndex = 7;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(13, 171);
+            this.button5.Location = new System.Drawing.Point(13, 187);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(128, 23);
             this.button5.TabIndex = 8;
@@ -135,7 +136,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(171, 171);
+            this.button6.Location = new System.Drawing.Point(171, 187);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(136, 23);
             this.button6.TabIndex = 9;
@@ -174,11 +175,24 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Enabled = false;
+            this.checkBox5.Location = new System.Drawing.Point(36, 114);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(164, 16);
+            this.checkBox5.TabIndex = 13;
+            this.checkBox5.Text = "ToClipboardボタンを表示する";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            // 
             // Config1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 260);
+            this.ClientSize = new System.Drawing.Size(331, 274);
+            this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.checkBox3);
@@ -221,5 +235,6 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.CheckBox checkBox5;
     }
 }

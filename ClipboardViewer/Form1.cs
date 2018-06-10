@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;   // iniファイル読み込み用
 
 namespace ClipboardViewer
 {
-
     public partial class Form1 : Form
     {
         private MyClipboardViewer viewer;
@@ -110,13 +109,15 @@ namespace ClipboardViewer
                 {
                     try
                     {
-                        val.moji[i] = File.ReadAllText("log" + (i + 1).ToString() + ".txt");
+                        val.moji[i] = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory +"log" + (i + 1).ToString() + ".txt");
                     }
                     catch (Exception e)
                     {
-                        
+                        MessageBox.Show("ログファイル取得で問題が発生しました。" + e);
+                       // break;
                     }
                 }
+                textBoxReDraw();
             }
 
 
@@ -169,6 +170,15 @@ namespace ClipboardViewer
             this.textBox6.Text = val.moji[5];
             this.textBox7.Text = val.moji[6];
             this.textBox8.Text = val.moji[7];
+
+            this.button1.Text = "  To ClipBoard (" + val.moji[0].Length + ")";
+            this.button2.Text = "  To ClipBoard (" + val.moji[1].Length + ")";
+            this.button3.Text = "  To ClipBoard (" + val.moji[2].Length + ")";
+            this.button4.Text = "  To ClipBoard (" + val.moji[3].Length + ")";
+            this.button5.Text = "  To ClipBoard (" + val.moji[4].Length + ")";
+            this.button6.Text = "  To ClipBoard (" + val.moji[5].Length + ")";
+            this.button7.Text = "  To ClipBoard (" + val.moji[6].Length + ")";
+            this.button8.Text = "  To ClipBoard (" + val.moji[7].Length + ")";
         }
 
         //Winメッセージが来ると呼び出される。とりあえず今はホットキーについて使用してる。
@@ -181,67 +191,36 @@ namespace ClipboardViewer
             {
                 if((int)m.WParam == 0x01){
                     button1_Click(null,null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
                 if ((int)m.WParam == 0x02)
                 {
                     button2_Click(null, null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
                 if ((int)m.WParam == 0x03)
                 {
                     button3_Click(null, null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
                 if ((int)m.WParam == 0x04)
                 {
                     button4_Click(null, null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
                 if ((int)m.WParam == 0x05)
                 {
                     button5_Click(null, null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
                 if ((int)m.WParam == 0x06)
                 {
                     button6_Click(null, null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
                 if ((int)m.WParam == 0x07)
                 {
                     button7_Click(null, null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
                 if ((int)m.WParam == 0x08)
                 {
                     button8_Click(null, null);
-                    if (property.PasteByHotKey)
-                    {
-                        SendKeys.Send("^(v)");
-                    }
                 }
+                SendKeys.Send("^(v)");
             }
         }
 
@@ -320,6 +299,7 @@ namespace ClipboardViewer
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             notifyIcon1.Visible = false;
+            //this.Close();
             Application.Exit();
         }
         
@@ -441,7 +421,21 @@ namespace ClipboardViewer
             }
             else if (property.CloseButton.ToString() == "False")
             {
-                //そのまま閉じてもらう
+                //そのまま閉じてもらう(何もしない)
+                e.Cancel = false;
+            }
+
+            if (e.CloseReason == CloseReason.ApplicationExitCall)
+            {
+                e.Cancel = false;
+                MessageBox.Show("Application.Exit()が呼び出されました。なぜか、ログは保存されません。");
+
+            }
+
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+            {
+                e.Cancel = false;
+                MessageBox.Show("シャットダウンを検出しました。終了します。");
             }
         }
 

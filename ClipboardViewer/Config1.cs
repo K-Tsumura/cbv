@@ -201,6 +201,8 @@ namespace ClipboardViewer
                         );
 
                 }
+
+
             }
 
 
@@ -223,6 +225,11 @@ namespace ClipboardViewer
             {
                 property.PasteByHotKey = false;
             }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
 
 
